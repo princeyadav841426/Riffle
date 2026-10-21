@@ -43,6 +43,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         buildWindow()
+        #if RIFFLE_SNAPSHOT
+        // scripts: render the welcome window to a PNG and exit (layout check without screen capture).
+        showStatus(ok: true, "Riffle is on. Select any folder in Finder and press Space.")
+        conflictLabel.stringValue = "PeekX is also installed and may answer folder previews instead of Riffle. Move PeekX to the Trash."
+        conflictRow.isHidden = CommandLine.arguments.count < 3
+        window.appearance = NSAppearance(named: .darkAqua)
+        window.layoutIfNeeded()
+        if let view = window.contentView?.superview, let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) {
+            view.cacheDisplay(in: view.bounds, to: rep)
+            try? rep.representation(using: .png, properties: [:])?.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
+        }
+        exit(0)
+        #endif
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -136,19 +149,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return field
     }
 
-    private func step(_ number: String, _ text: String) -> NSView {
-        let badge = NSTextField(labelWithString: number)
-        badge.font = .monospacedDigitSystemFont(ofSize: 12, weight: .bold)
-        badge.alignment = .center
-        badge.textColor = .white
-        badge.wantsLayer = true
-        badge.layer?.backgroundColor = NSColor.controlAccentColor.cgColor
-        badge.layer?.cornerRadius = 10
-        badge.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            badge.widthAnchor.constraint(equalToConstant: 20),
-            badge.heightAnchor.constraint(equalToConstant: 20)
-        ])
+    private func step(_ number: Int, _ text: String) -> NSView {
+        let badge = NSImageView(image: NSImage(systemSymbolName: "\(number).circle.fill", accessibilityDescription: "Step \(number)") ?? NSImage())
+        badge.symbolConfiguration = .init(pointSize: 18, weight: .semibold)
+        badge.contentTintColor = .controlAccentColor
+        badge.setContentHuggingPriority(.required, for: .horizontal)
         let body = NSTextField(wrappingLabelWithString: text)
         body.font = .systemFont(ofSize: 13)
         body.isSelectable = false
@@ -191,9 +196,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusRow.spacing = 8
 
         let steps = NSStackView(views: [
-            step("1", "Select any folder in Finder."),
-            step("2", "Press Space — the whole folder opens in Quick Look."),
-            step("3", "Click a file for its preview and details. Drag the divider to resize.")
+            step(1, "Select any folder in Finder."),
+            step(2, "Press Space — the whole folder opens in Quick Look."),
+            step(3, "Click a file for its preview and details. Drag the divider to resize.")
         ])
         steps.orientation = .vertical
         steps.alignment = .leading
@@ -204,10 +209,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         conflictLabel.isSelectable = false
         let revealButton = NSButton(title: "Show PeekX", target: self, action: #selector(revealConflictingApp))
         revealButton.controlSize = .small
+        conflictLabel.alignment = .center
         conflictRow = NSStackView(views: [conflictLabel, revealButton])
-        conflictRow.orientation = .horizontal
-        conflictRow.alignment = .centerY
-        conflictRow.spacing = 10
+        conflictRow.orientation = .vertical
+        conflictRow.alignment = .centerX
+        conflictRow.spacing = 8
         conflictRow.isHidden = true
 
         let settingsButton = NSButton(title: "Extension Settings…", target: self, action: #selector(openExtensionSettings))

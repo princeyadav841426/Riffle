@@ -1,0 +1,26 @@
+RIFFLE — HOW TO INSTALL
+=======================
+
+1. Drag Riffle into the Applications folder (in this window).
+
+2. Open Riffle from your Applications folder.
+
+   Riffle is free and isn't sold through Apple, so the first time macOS says
+   it "could not verify" Riffle. That's expected:
+
+     • Click Done.
+     • Open System Settings → Privacy & Security.
+     • Scroll down and click "Open Anyway" next to Riffle.
+
+   Prefer Terminal? This does the same thing:
+
+     xattr -dr com.apple.quarantine /Applications/Riffle.app
+
+3. Riffle shows a green check when it's ready. Close it.
+
+4. Select any folder in Finder and press Space.
+
+Not working? Open Riffle again and click "Extension Settings…", then make sure
+Riffle is switched on under Quick Look.
+
+To uninstall: drag Riffle from Applications to the Trash.

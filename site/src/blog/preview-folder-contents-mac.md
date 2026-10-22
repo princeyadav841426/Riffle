@@ -45,7 +45,7 @@ Hold <kbd>⌥</kbd> while you click the triangle to expand **every** subfolder a
 [Riffle](/) is a free, open-source Quick Look extension that we make. Once it's installed, pressing <kbd>Space</kbd> on a folder shows what's inside it:
 
 <figure>
-<img src="/assets/img/shot-video.webp" width="2080" height="1280" alt="Riffle showing a folder's files and subfolders, with a video selected and its preview on the right" loading="lazy" decoding="async">
+<img src="/assets/img/shot-video.webp" width="2080" height="1080" alt="Riffle showing a folder's files and subfolders, with a video selected and its preview on the right" loading="lazy" decoding="async">
 <figcaption>Press Space on a folder: the file list on the left, a preview and details for whatever you click on the right.</figcaption>
 </figure>
 

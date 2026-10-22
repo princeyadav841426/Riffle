@@ -12,8 +12,8 @@
 - `node site/build.mjs` → `site/dist/`. Landing = `site/src/index.html`. Posts = `site/src/blog/*.md` (front matter: title, seoTitle, description, date, order, disclosure, related). Tokens like `{{download}}`, `{{dmgSize}}`, `{{repo}}` are filled at build time.
 - **One place to change domain/version/download:** the `SITE` object at the top of `site/build.mjs`.
 - Deploy: `cd site && npx vercel deploy --prod --yes --scope cutlume1` (Vercel runs `node build.mjs`; `vercel.json` sets cleanUrls + headers).
-- Brand = Aignix guideline (navy #05070D, one accent #208ADF, Space Grotesk/Inter/DM Mono, glow only on clickables, accent buttons labelled in navy). Only the closing CTA is centred.
-- Screenshots come from a generated demo folder ("Launch Campaign": ffmpeg gradients, never real files), rendered by `scripts/harness.sh` (folder UI) and `scripts/mdshot` (markdown). Share image: `site/tools/og.swift` → `og.jpg` (kept <300 KB for WhatsApp).
+- **Design = Moodwall's light system (Prince, 2026-10-22: "no dark, not the Aignix colours, no AI slop").** Canvas #f6f6f6, white cards with hairline shadows, Inter only, one blue (#3b7cf5; #2f6fe4 for text/buttons), pastel note cards (yellow/pink/green/blue) for use cases, a dot-grid "board" behind the hero shot, Moodwall .btn styles. Banned here: dark theme, gradients, glows, glass, grain, fake window chrome, icon grids, uppercase eyebrow labels.
+- Screenshots come from a generated demo folder ("Launch Campaign": ffmpeg gradients, never real files), rendered in LIGHT mode by `HARNESS_LIGHT=1 scripts/harness.sh "<demo>" <out> 1040 540 "0,5,7"` (folder UI) and `build/harness/mdshot` (markdown, light by default). Share image: `site/tools/og.swift` → `og.jpg` (kept <300 KB for WhatsApp).
 - Competitor facts (prices, features) were checked 2026-10-22 from App Store/developer pages and are cited in the posts. Re-check before updating any comparison.
 
 ## What it is

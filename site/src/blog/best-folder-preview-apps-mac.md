@@ -43,7 +43,7 @@ Prices are from the US Mac App Store and the developers' sites, and they vary by
 **Price:** free · **Needs:** macOS 14+ · **Made by:** Aignix
 
 <figure>
-<img src="/assets/img/shot-photo.webp" width="2080" height="1280" alt="Riffle previewing a folder with an image selected, showing its dimensions" loading="lazy" decoding="async">
+<img src="/assets/img/shot-photo.webp" width="2080" height="1080" alt="Riffle previewing a folder with an image selected, showing its dimensions" loading="lazy" decoding="async">
 </figure>
 
 Riffle shows the folder as a sortable list: Name, Date Modified, Size and Kind. Every subfolder gets its full recursive size, measured in the background, and you can expand subfolders inside the preview. Click any file and a side pane shows a thumbnail (images, video frames, PDFs, documents) along with kind, size, pixel dimensions, item count and dates. Long file names wrap instead of being cut off. Filter tabs narrow the list to Folders, Images, Docs or Media, and the divider between list and preview drags.

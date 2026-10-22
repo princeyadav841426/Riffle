@@ -27,6 +27,12 @@ export const SITE = {
 };
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const icon = {
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
+  github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg>',
+};
+
 const fill = (html) =>
   html
     .replaceAll("{{download}}", SITE.download)
@@ -35,16 +41,12 @@ const fill = (html) =>
     .replaceAll("{{version}}", SITE.version)
     .replaceAll("{{dmgSize}}", SITE.dmgSize)
     .replaceAll("{{minOS}}", SITE.minOS)
-    .replaceAll("{{maker}}", SITE.maker.url);
-
-const icon = {
-  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>',
-  github: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>',
-};
+    .replaceAll("{{maker}}", SITE.maker.url)
+    .replace(/\{\{icon:(\w+)\}\}/g, (_, name) => icon[name] ?? "");
 
 const nav = [
   ["/#features", "Features"],
-  ["/#how", "How it works"],
+  ["/#install", "Install"],
   ["/#compare", "Compare"],
   ["/blog", "Blog"],
   ["/#faq", "FAQ"],
@@ -62,8 +64,8 @@ function head({ title, description, canonical, type = "website", image = "/og.jp
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#05070D">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#f6f6f6">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="${type}">
 <meta property="og:site_name" content="Riffle by Aignix">
 <meta property="og:title" content="${esc(title)}">
@@ -82,7 +84,7 @@ function head({ title, description, canonical, type = "website", image = "/og.jp
 <link rel="alternate" type="application/rss+xml" title="Riffle blog" href="${SITE.url}/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css">
 ${jsonld.map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join("\n")}
 ${extra}
@@ -96,10 +98,10 @@ function header(active = "") {
   return `<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <nav class="wrap nav" aria-label="Main">
-    <a class="brand" href="/"><img src="/assets/img/icon-256.webp" alt="" width="32" height="32">Riffle<small>by Aignix</small></a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">Menu</button>
+    <a class="brand" href="/"><img src="/assets/img/icon-256.webp" alt="" width="28" height="28">Riffle <span>by Aignix</span></a>
+    <button class="btn menu-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <ul class="nav-links" id="nav-links">${links}<li><a href="${SITE.repo}" rel="noopener">GitHub</a></li></ul>
-    <a class="btn btn-primary" href="${SITE.download}">${icon.download}Download free</a>
+    <a class="btn primary" href="${SITE.download}">${icon.download}Download</a>
   </nav>
 </header>`;
 }
@@ -107,33 +109,16 @@ function header(active = "") {
 function footer() {
   return `<footer class="site-footer">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a class="brand" href="/"><img src="/assets/img/icon-256.webp" alt="" width="32" height="32">Riffle</a>
-        <p>See what's inside any folder without opening it. Free and open source, for Mac.</p>
-        <p>Made by <a href="${SITE.maker.url}">Aignix</a>, a video studio. We built it for our own editing folders.</p>
-      </div>
-      <div>
-        <h4>Riffle</h4>
-        <ul>
-          <li><a href="${SITE.download}">Download (.dmg)</a></li>
-          <li><a href="${SITE.releases}" rel="noopener">Release notes</a></li>
-          <li><a href="${SITE.repo}" rel="noopener">Source code</a></li>
-          <li><a href="/#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Guides</h4>
-        <ul>
-          <li><a href="/blog/folder-sizes-mac">See folder sizes on a Mac</a></li>
-          <li><a href="/blog/preview-folder-contents-mac">Preview a folder without opening it</a></li>
-          <li><a href="/blog/best-folder-preview-apps-mac">Best folder preview apps</a></li>
-          <li><a href="/blog/quick-look-markdown-mac">Quick Look for Markdown</a></li>
-          <li><a href="/blog">All posts</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="footnote">© 2026 Aignix · <a href="${SITE.repo}/blob/main/LICENSE" rel="noopener">MIT License</a> · Riffle is built on <a href="https://github.com/altic-dev/PeekX" rel="noopener">PeekX</a> by ALTIC (MIT). Mac, Finder and Quick Look are trademarks of Apple Inc. Riffle is not affiliated with Apple. This site uses no cookies and no analytics.</p>
+    <ul class="foot-links">
+      <li><a href="${SITE.download}">Download</a></li>
+      <li><a href="${SITE.releases}" rel="noopener">Release notes</a></li>
+      <li><a href="${SITE.repo}" rel="noopener">Source code</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/blog/folder-sizes-mac">Folder sizes on a Mac</a></li>
+      <li><a href="/blog/best-folder-preview-apps-mac">Folder preview apps compared</a></li>
+      <li><a href="${SITE.maker.url}">Aignix</a></li>
+    </ul>
+    <p class="credits">© 2026 Aignix · <a href="${SITE.repo}/blob/main/LICENSE" rel="noopener">MIT License</a> · Built on <a href="https://github.com/altic-dev/PeekX" rel="noopener">PeekX</a> by ALTIC (MIT). Mac, Finder and Quick Look are trademarks of Apple Inc.; Riffle isn't affiliated with Apple. This site has no cookies and no analytics.</p>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>
@@ -233,20 +218,18 @@ for (const post of posts) {
   const related = (post.related ?? []).map((s) => bySlug[s]).filter(Boolean);
   const url = `${SITE.url}/blog/${post.slug}`;
   const body = `<article class="wrap article">
-  <header>
-    <p class="crumbs"><a href="/">Riffle</a> / <a href="/blog">Blog</a></p>
-    <h1>${esc(post.title)}</h1>
-    <p class="lede">${esc(post.description)}</p>
-    <p class="post-meta">${fmtDate(post.date)} · ${post.minutes} min read · By Aignix</p>
-    ${post.disclosure ? `<p class="disclosure">${esc(post.disclosure)}</p>` : ""}
-  </header>
+  <p class="crumbs"><a href="/">Riffle</a> / <a href="/blog">Blog</a></p>
+  <h1>${esc(post.title)}</h1>
+  <p class="lead">${esc(post.description)}</p>
+  <p class="meta">${fmtDate(post.date)} · ${post.minutes} min read · Aignix</p>
+  ${post.disclosure ? `<p class="disclosure">${esc(post.disclosure)}</p>` : ""}
   <div class="prose">
 ${marked.parse(post.body, { gfm: true })}
   </div>
-  <aside class="cta-box glass">
-    <img src="/assets/img/icon-256.webp" alt="" width="64" height="64">
-    <div><h3>Try Riffle — it's free</h3><p>Press Space on a folder and see everything inside. ${SITE.dmgSize}, ${SITE.minOS}.</p></div>
-    <a class="btn btn-primary" href="${SITE.download}">${icon.download}Download for Mac</a>
+  <aside class="card cta-card">
+    <img src="/assets/img/icon-256.webp" alt="" width="56" height="56">
+    <div><h3>Try Riffle, free</h3><p>Press Space on a folder and see everything inside. ${SITE.dmgSize}, ${SITE.minOS}.</p></div>
+    <a class="btn primary" href="${SITE.download}">${icon.download}Download for Mac</a>
   </aside>
   ${related.length ? `<nav class="related" aria-label="Related guides"><h2>Keep reading</h2><ul>${related.map((r) => `<li><a href="/blog/${r.slug}">${esc(r.title)}</a></li>`).join("")}</ul></nav>` : ""}
 </article>`;
@@ -282,13 +265,13 @@ ${marked.parse(post.body, { gfm: true })}
 
 // Blog index
 const list = posts
-  .map((p) => `<a class="post-card glass" href="/blog/${p.slug}"><span class="post-meta">${fmtDate(p.date)} · ${p.minutes} min read</span><h2>${esc(p.title)}</h2><p>${esc(p.description)}</p></a>`)
+  .map((p) => `<a class="card post-card" href="/blog/${p.slug}"><span class="meta">${fmtDate(p.date)} · ${p.minutes} min read</span><h2>${esc(p.title)}</h2><p>${esc(p.description)}</p></a>`)
   .join("\n");
 writeFileSync(
   path.join(DIST, "blog", "index.html"),
   page(
-    { title: "Riffle blog — Mac folder tips, Quick Look guides and comparisons", description: "Guides for seeing folder contents and sizes on a Mac, Quick Look tips, and honest comparisons of folder preview apps.", canonical: "/blog" },
-    `<section class="wrap" style="padding-top:clamp(48px,7vw,88px)"><div class="section-head"><span class="label">Blog</span><h1 style="font-size:clamp(36px,5vw,56px)">Guides for people who live in folders</h1><p>How to see folder sizes, preview what's inside without opening anything, and which Quick Look tools are worth installing.</p></div><div class="blog-list">${list}</div></section>`,
+    { title: "Riffle blog: Mac folder tips, Quick Look guides and comparisons", description: "Guides for seeing folder contents and sizes on a Mac, Quick Look tips, and honest comparisons of folder preview apps.", canonical: "/blog" },
+    `<div class="wrap"><header class="page-head"><h1>Guides for people who live in folders</h1><p>How to see folder sizes, look inside folders without opening them, and which Quick Look tools are worth installing.</p></header><div class="post-list">${list}</div></div>`,
     "/blog",
   ),
 );
@@ -296,7 +279,7 @@ writeFileSync(
 // 404
 writeFileSync(
   path.join(DIST, "404.html"),
-  page({ title: "Page not found | Riffle", description: "This page doesn't exist.", canonical: "/404" }, `<section class="wrap"><span class="label">404</span><h1 style="font-size:48px">Nothing in this folder.</h1><p class="lede" style="margin-top:20px">The page you wanted isn't here. <a href="/">Go to the Riffle home page</a> or <a href="/blog">read the blog</a>.</p></section>`),
+  page({ title: "Page not found | Riffle", description: "This page doesn't exist.", canonical: "/404" }, `<div class="wrap"><header class="page-head" style="padding-bottom:96px"><h1>Nothing in this folder.</h1><p>The page you wanted isn't here. <a href="/">Go to the Riffle home page</a> or <a href="/blog">read the blog</a>.</p></header></div>`),
 );
 
 // sitemap, robots, RSS

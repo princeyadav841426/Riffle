@@ -65,7 +65,7 @@ Click the **ⓘ** next to a category such as Documents to see large files and a 
 [Riffle](/) is a free Quick Look extension we make. Select any folder in Finder and press <kbd>Space</kbd>. Instead of a big folder icon, you get the folder's contents, and every subfolder's size fills in as Riffle measures it in the background.
 
 <figure>
-<img src="/assets/img/shot-folder.webp" width="2080" height="1280" alt="Riffle showing a project folder with a size next to every subfolder" loading="lazy" decoding="async">
+<img src="/assets/img/shot-folder.webp" width="2080" height="1080" alt="Riffle showing a project folder with a size next to every subfolder" loading="lazy" decoding="async">
 <figcaption>Each subfolder gets its full size, measured all the way down. The total is in the header.</figcaption>
 </figure>
 

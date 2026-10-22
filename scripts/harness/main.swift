@@ -13,6 +13,7 @@ let width = args.count > 3 ? Double(args[3]) ?? 808 : 808
 let height = args.count > 4 ? Double(args[4]) ?? 560 : 560
 let rows = args.count > 5 ? args[5].split(separator: ",").compactMap { Int($0) } : [-1]
 
+let light = ProcessInfo.processInfo.environment["HARNESS_LIGHT"] != nil
 _ = NSApplication.shared
 NSApp.setActivationPolicy(.prohibited)
 
@@ -24,7 +25,8 @@ func pump(_ seconds: Double) {
 func snapshot(_ view: NSView, to path: String) {
     // cacheDisplay skips the window's own background, so paint one under the content.
     view.wantsLayer = true
-    view.layer?.backgroundColor = NSColor(calibratedWhite: 0.16, alpha: 1).cgColor
+    view.layer?.backgroundColor = light ? NSColor(calibratedWhite: 0.955, alpha: 1).cgColor
+                                        : NSColor(calibratedWhite: 0.16, alpha: 1).cgColor
     view.layoutSubtreeIfNeeded()
     guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
     view.cacheDisplay(in: view.bounds, to: rep)
@@ -34,7 +36,7 @@ func snapshot(_ view: NSView, to path: String) {
 let controller = PreviewViewController()
 let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: width, height: height),
                       styleMask: [.titled, .resizable], backing: .buffered, defer: false)
-window.appearance = NSAppearance(named: .darkAqua)
+window.appearance = NSAppearance(named: light ? .aqua : .darkAqua)
 window.contentViewController = controller
 window.setContentSize(NSSize(width: width, height: height))
 if ProcessInfo.processInfo.environment["HARNESS_ONSCREEN"] != nil { window.setFrameOrigin(NSPoint(x: -4000, y: 0)); window.orderFrontRegardless() }

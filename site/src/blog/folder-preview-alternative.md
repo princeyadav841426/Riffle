@@ -24,7 +24,7 @@ If you'd rather not pay, or you want software whose code you can read, there are
 - Markdown files rendered as formatted pages, offline
 
 <figure>
-<img src="/assets/img/shot-video.webp" width="2080" height="1280" alt="Riffle's Quick Look preview of a folder, with a video selected" loading="lazy" decoding="async">
+<img src="/assets/img/shot-video.webp" width="2080" height="1080" alt="Riffle's Quick Look preview of a folder, with a video selected" loading="lazy" decoding="async">
 </figure>
 
 **What it gives up compared with the paid apps:** archive previews (no ZIP or RAR yet), and Apple notarization. Riffle isn't notarized, so the first launch needs one trip to **System Settings → Privacy & Security → Open Anyway**. After that it's the same as any other app.

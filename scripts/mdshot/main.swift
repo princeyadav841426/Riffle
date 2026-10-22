@@ -13,11 +13,12 @@ _ = NSApplication.shared
 NSApp.setActivationPolicy(.prohibited)
 let window = NSWindow(contentRect: NSRect(x: -4000, y: 0, width: width, height: height),
                       styleMask: [.borderless], backing: .buffered, defer: false)
-window.appearance = NSAppearance(named: .darkAqua)
+let appearance = NSAppearance(named: ProcessInfo.processInfo.environment["MDSHOT_DARK"] != nil ? .darkAqua : .aqua)
+window.appearance = appearance
 let config = WKWebViewConfiguration()
 config.defaultWebpagePreferences.allowsContentJavaScript = false
 let web = WKWebView(frame: NSRect(x: 0, y: 0, width: width, height: height), configuration: config)
-web.appearance = NSAppearance(named: .darkAqua)
+web.appearance = appearance
 window.contentView = web
 window.orderFrontRegardless()
 web.loadHTMLString(DocumentRenderer.html(forFileAt: file, style: .fullPage), baseURL: nil)

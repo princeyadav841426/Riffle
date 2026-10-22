@@ -7,7 +7,7 @@
   <a href="https://github.com/princeyadav841426/Riffle/releases/latest"><img src="https://img.shields.io/github/v/release/princeyadav841426/Riffle?label=release&color=2f6fe4" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/macOS-14%2B-555" alt="macOS 14 or later">
   <img src="https://img.shields.io/badge/Apple%20silicon%20%2B%20Intel-universal-555" alt="Universal app">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/princeyadav841426/Riffle?color=555" alt="MIT license"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-555" alt="MIT license"></a>
 </p>
 
 Press <kbd>Space</kbd> on a folder in Finder and macOS shows you a big blue folder icon. **Riffle shows you what's inside it instead**: every file and subfolder, real folder sizes, thumbnails, and details for whatever you click. No windows to open and close.

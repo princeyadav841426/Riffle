@@ -2,13 +2,13 @@
 
 ## ⏸️ RESUME HERE
 - **Updated:** 2026-10-22 (account 1)
-- **Last worked:** Built the website: landing page + 5 SEO guides, deployed to Vercel (project `riffle`, team `cutlume1`). Shipped **app v1.0.1** (column-width polish, footer → website, stable `Riffle.dmg` asset).
-- **Current state:** Site LIVE at https://riffle-ten.vercel.app. `riffle.aignix.online` is attached to the Vercel project but **waits on one DNS record at Hostinger**: `CNAME riffle → 81d2c86bda68e0bd.vercel-dns-017.com` (Vercel's rank-2 fallback, `cname.vercel-dns.com`, also works). App v1.0.1 is live on GitHub, and the download link `…/releases/latest/download/Riffle.dmg` was verified (SHA matches).
-- **NEXT STEP:** ON HOLD (Prince, 2026-10-22): the landing-page request was actually meant for **Moodwall**, not Riffle, so Riffle's site is parked as is. It's live at https://riffle-ten.vercel.app; riffle.aignix.online is attached in Vercel but no DNS record was added, so it doesn't resolve. If Prince wants it later: add `CNAME riffle → 81d2c86bda68e0bd.vercel-dns-017.com` at Hostinger, verify, then submit the sitemap in GSC. If he doesn't: remove the Vercel project `riffle` (on his OK).
-- **Already done:** app v1.0.0 + v1.0.1 · GitHub repo + releases · site (landing, tour, comparison, FAQ, 5 posts, sitemap/robots/RSS/JSON-LD/OG image) · demo-folder screenshots only (Prince's rule: never show his real files).
-- **Open decisions for Prince:** Apple Developer ID ($99/yr) to notarize · move to riffle.aignix.com when aignix.com is bought (change `SITE.url` in `site/build.mjs` + 301 the old host).
+- **Decision (Prince, 2026-10-22):** Riffle lives on **GitHub only**. No website: the Vercel project `riffle` was deleted on his instruction, and the site code is archived locally in `archive/website-2026-10-22/` (gitignored). The landing-page and blog request was actually meant for **Moodwall** (queued in Moodwall's context).
+- **Current state:** v1.0.2 LIVE: https://github.com/princeyadav841426/Riffle/releases/tag/v1.0.2. The download link `…/releases/latest/download/Riffle.dmg` was verified (SHA 219c1055…dd69). README rebuilt: light/dark poster banner, demo GIF, light/dark screenshots (video, photo, PDF, folder, markdown), install for macOS 15+/14/Terminal, how-to-use, troubleshooting, FAQ, build, credits. Repo description, homepage and 10 topics set. GitHub detects MIT (credits moved to NOTICE.md), and languages show Swift/Shell (marked is vendored via .gitattributes). v1.0.1 notes say it's superseded.
+- **NEXT STEP:** Nothing required. Optional for Prince: upload `docs/images/banner-light.png` as the repo's **social preview** (GitHub → Settings → General → Social preview; this has no API). Re-check his click-through test in real Quick Look if he reports anything.
+- **Visual assets:** all from the generated demo folder ("Launch Campaign", never Prince's files). Regenerate with `HARNESS_LIGHT=1 scripts/harness.sh "<demo>" <out> 1040 540 "7,5,6,0"` (light), the same without `HARNESS_LIGHT` (dark), `build/harness/mdshot` (`MDSHOT_DARK=1` for dark), `swift scripts/make_banner.swift light|dark <icon> <shot> <out>`, and ffmpeg concat → GIF (palettegen).
+- **Open decisions for Prince:** Apple Developer ID ($99/yr) for notarization. The Intel slice is untested on real Intel hardware.
 
-## Website (site/)
+## Website (archived, not live)
 - `node site/build.mjs` → `site/dist/`. Landing = `site/src/index.html`. Posts = `site/src/blog/*.md` (front matter: title, seoTitle, description, date, order, disclosure, related). Tokens like `{{download}}`, `{{dmgSize}}`, `{{repo}}` are filled at build time.
 - **One place to change domain/version/download:** the `SITE` object at the top of `site/build.mjs`.
 - Deploy: `cd site && npx vercel deploy --prod --yes --scope cutlume1` (Vercel runs `node build.mjs`; `vercel.json` sets cleanUrls + headers).

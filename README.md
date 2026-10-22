@@ -176,7 +176,7 @@ The build is universal (arm64 + x86_64) and ad-hoc signed. `scripts/harness.sh <
 
 ## Credits
 
-Riffle started as a fork of [PeekX](https://github.com/altic-dev/PeekX) by ALTIC (MIT). Since then it's had a rebuilt preview pane and layout, recursive folder sizes, thumbnails, offline Markdown, a draggable divider and a setup app. Markdown is rendered with [marked](https://github.com/markedjs/marked) (MIT).
+Riffle started as a fork of [PeekX](https://github.com/altic-dev/PeekX) by ALTIC (MIT). Since then it's had a rebuilt preview pane and layout, recursive folder sizes, thumbnails, offline Markdown, a draggable divider and a setup app. Markdown is rendered with [marked](https://github.com/markedjs/marked) (MIT). See [NOTICE.md](NOTICE.md).
 
 Made by [Aignix](https://aignix.online).
 

@@ -6,8 +6,8 @@
 #   scripts/build.sh --install  → also installs into /Applications and refreshes Quick Look
 set -euo pipefail
 
-VERSION="1.0.0"
-BUILD="1"
+VERSION="1.0.1"
+BUILD="2"
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/build"

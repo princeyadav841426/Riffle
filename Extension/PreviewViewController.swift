@@ -744,6 +744,13 @@ final class PreviewViewController: NSViewController, QLPreviewingController {
             widths[index] -= give
             deficit -= give
         }
+        // In a roomy list, let Size and Kind breathe before Name takes the rest.
+        var spare = clipWidth - spacing - widths.reduce(0, +)
+        for (index, cap) in [(2, CGFloat(86)), (3, CGFloat(132))] where spare > 0 && index < columns.count {
+            let give = min(spare / 2, max(0, cap - widths[index]))
+            widths[index] += give
+            spare -= give
+        }
         widths[0] = max(nameColumn.minWidth, floor(clipWidth - widths.dropFirst().reduce(0, +) - spacing) - 1)
         for (column, width) in zip(columns, widths) where abs(column.width - width) > 0.5 {
             column.width = width

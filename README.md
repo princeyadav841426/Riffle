@@ -7,6 +7,8 @@
 <p align="center"><b>See what's inside any folder without opening it.</b><br>
 Select a folder in Finder, press <kbd>Space</kbd>, and riffle through everything inside.</p>
 
+<p align="center"><a href="https://riffle.aignix.online"><b>riffle.aignix.online</b></a> · <a href="https://github.com/princeyadav841426/Riffle/releases/latest/download/Riffle.dmg">Download (free)</a></p>
+
 <p align="center">
   <img src="docs/images/screenshot.png" width="820" alt="Riffle previewing a folder in Quick Look">
 </p>
@@ -27,7 +29,7 @@ Riffle is read-only and runs inside Apple's Quick Look sandbox. It has no analyt
 
 ## Install
 
-1. Download **Riffle-x.y.z.dmg** from [Releases](../../releases/latest).
+1. Download **[Riffle.dmg](https://github.com/princeyadav841426/Riffle/releases/latest/download/Riffle.dmg)** (always the latest version), or pick a version from [Releases](../../releases).
 2. Open it and drag **Riffle** into **Applications**.
 3. Open Riffle from Applications. Riffle is free and isn't sold through Apple, so the first launch shows *"Apple could not verify Riffle…"*. Click **Done**, then go to **System Settings → Privacy & Security** and click **Open Anyway**.
    Or run this in Terminal:
@@ -53,7 +55,7 @@ scripts/build.sh            # → build/Riffle.app and dist/Riffle-<version>.dmg
 scripts/build.sh --install  # also installs into /Applications and refreshes Quick Look
 ```
 
-The build is universal (arm64 + x86_64) and ad-hoc signed. `scripts/harness.sh <folder> <out-prefix> [width] [height] [rows]` renders the preview offscreen to PNGs, for checking layout without going through Quick Look.
+The build is universal (arm64 + x86_64) and ad-hoc signed. The website lives in `site/` (`node site/build.mjs` → `site/dist/`). `scripts/harness.sh <folder> <out-prefix> [width] [height] [rows]` renders the preview offscreen to PNGs, for checking layout without going through Quick Look.
 
 ## Credits
 

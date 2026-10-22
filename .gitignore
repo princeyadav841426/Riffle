@@ -3,3 +3,6 @@ dist/
 .DS_Store
 *.xcuserstate
 Versions/v*/
+
+# Vercel link for the site
+site/.vercel/

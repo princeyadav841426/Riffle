@@ -1,6 +1,6 @@
 # Current version
-- **Live:** v1.0.1 (build 2), released 2026-10-22
+- **Live:** v1.0.2 (build 3), released 2026-10-22
 - **Download (always latest):** https://github.com/princeyadav841426/Riffle/releases/latest/download/Riffle.dmg
-- **v1.0.1 DMG SHA-256:** 75e66da2755b2670205a7fac37c067dbc977820e950973d2e739ed2e14575f47
-- **Website:** https://riffle.aignix.online (source in `site/`, Vercel project `riffle`)
+- **v1.0.2 DMG SHA-256:** 219c1055bdd374b6fbb3fc2d5cf05f0268f1b23354d1b09241fd5da63334dd69
+- **Home:** https://github.com/princeyadav841426/Riffle (GitHub only, no website. The Vercel project was deleted 2026-10-22; the site code is archived locally in `archive/website-2026-10-22/`.)
 - **Local install:** /Applications/Riffle.app

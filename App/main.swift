@@ -8,7 +8,7 @@ import Cocoa
 
 private let extensionID = "com.aignix.riffle.preview"
 private let legacyExtensionIDs = ["altic.PeekX.PeekXExt", "local.peekxplus.Ext"]
-private let repoURL = URL(string: "https://riffle.aignix.online")!
+private let repoURL = URL(string: "https://github.com/princeyadav841426/Riffle")!
 
 @discardableResult
 private func run(_ tool: String, _ arguments: [String]) -> String {

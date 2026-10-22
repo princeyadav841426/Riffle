@@ -1,12 +1,20 @@
 # Riffle — Project Context
 
 ## ⏸️ RESUME HERE
-- **Updated:** 2026-10-22 (account 1, after account 2 hit its limit mid-task)
-- **Last worked:** Fixed the right-pane text cropping, rebranded PeekX → **Riffle**, built v1.0.0, installed it locally (old PeekX.app moved to Trash), and **published** it.
-- **Current state:** LIVE. Repo https://github.com/princeyadav841426/Riffle (public). Release https://github.com/princeyadav841426/Riffle/releases/tag/v1.0.0 has `Riffle-1.0.0.dmg` (SHA-256 `ceddad11…14c8f`; a fresh download was re-verified). Verified in real Quick Look: folder list, readable right pane, all columns, markdown. Selection states verified in the offscreen harness.
-- **NEXT STEP:** Prince tests by clicking files inside a folder preview, then makes the Aignix video and links the release page. If he reports a layout problem: reproduce it with `scripts/harness.sh` at his window size first.
-- **Already done:** source recovered + 5 August patches · crop root cause fixed (NSSplitView ignored repositioning) · details pane · thumbnails · offline markdown · welcome app · icon · universal build · DMG · README · GitHub repo + v1.0.0 release.
-- **Open decision for Prince:** Apple Developer ID ($99/yr) to notarize, so downloaders don't have to click "Open Anyway". Untested: the Intel slice on a real Intel Mac.
+- **Updated:** 2026-10-22 (account 1)
+- **Last worked:** Built the website: landing page + 5 SEO guides, deployed to Vercel (project `riffle`, team `cutlume1`). Shipped **app v1.0.1** (column-width polish, footer → website, stable `Riffle.dmg` asset).
+- **Current state:** Site LIVE at https://riffle-ten.vercel.app. `riffle.aignix.online` is attached to the Vercel project but **waits on one DNS record at Hostinger**: `CNAME riffle → 81d2c86bda68e0bd.vercel-dns-017.com` (Vercel's rank-2 fallback, `cname.vercel-dns.com`, also works). App v1.0.1 is live on GitHub, and the download link `…/releases/latest/download/Riffle.dmg` was verified (SHA matches).
+- **NEXT STEP:** Add the CNAME (Prince does it in hPanel, or Claude does it through his logged-in Chrome once he says yes) → `npx vercel domains verify riffle.aignix.online --scope cutlume1` from `site/` → confirm HTTPS → submit `https://riffle.aignix.online/sitemap.xml` in Google Search Console + Bing (needs Prince's login; aignix.online may need a Domain property first).
+- **Already done:** app v1.0.0 + v1.0.1 · GitHub repo + releases · site (landing, tour, comparison, FAQ, 5 posts, sitemap/robots/RSS/JSON-LD/OG image) · demo-folder screenshots only (Prince's rule: never show his real files).
+- **Open decisions for Prince:** Apple Developer ID ($99/yr) to notarize · move to riffle.aignix.com when aignix.com is bought (change `SITE.url` in `site/build.mjs` + 301 the old host).
+
+## Website (site/)
+- `node site/build.mjs` → `site/dist/`. Landing = `site/src/index.html`. Posts = `site/src/blog/*.md` (front matter: title, seoTitle, description, date, order, disclosure, related). Tokens like `{{download}}`, `{{dmgSize}}`, `{{repo}}` are filled at build time.
+- **One place to change domain/version/download:** the `SITE` object at the top of `site/build.mjs`.
+- Deploy: `cd site && npx vercel deploy --prod --yes --scope cutlume1` (Vercel runs `node build.mjs`; `vercel.json` sets cleanUrls + headers).
+- Brand = Aignix guideline (navy #05070D, one accent #208ADF, Space Grotesk/Inter/DM Mono, glow only on clickables, accent buttons labelled in navy). Only the closing CTA is centred.
+- Screenshots come from a generated demo folder ("Launch Campaign": ffmpeg gradients, never real files), rendered by `scripts/harness.sh` (folder UI) and `scripts/mdshot` (markdown). Share image: `site/tools/og.swift` → `og.jpg` (kept <300 KB for WhatsApp).
+- Competitor facts (prices, features) were checked 2026-10-22 from App Store/developer pages and are cited in the posts. Re-check before updating any comparison.
 
 ## What it is
 A free, open-source macOS Quick Look extension. Select a folder in Finder, press Space, and see its contents (sizes, dates, kinds, expandable subfolders) plus a preview/details pane for any file you click. Purpose: a free tool Prince gives away on the Aignix page, to build following and show the team can build things.

@@ -50,7 +50,7 @@ const nav = [
   ["/#faq", "FAQ"],
 ];
 
-function head({ title, description, canonical, type = "website", image = "/og.png", jsonld = [], extra = "" }) {
+function head({ title, description, canonical, type = "website", image = "/og.jpg", jsonld = [], extra = "" }) {
   const url = SITE.url + canonical;
   const img = SITE.url + image;
   return `<!doctype html>
@@ -177,7 +177,7 @@ const fmtDate = (iso) =>
 rmSync(DIST, { recursive: true, force: true });
 mkdirSync(path.join(DIST, "blog"), { recursive: true });
 cpSync(path.join(SRC, "assets"), path.join(DIST, "assets"), { recursive: true });
-for (const f of ["og.png", "favicon.png", "apple-touch-icon.png"]) cpSync(path.join(SRC, f), path.join(DIST, f));
+for (const f of ["og.jpg", "favicon.png", "apple-touch-icon.png"]) cpSync(path.join(SRC, f), path.join(DIST, f));
 
 const posts = readdirSync(path.join(SRC, "blog"))
   .filter((f) => f.endsWith(".md"))
@@ -197,7 +197,7 @@ const appLd = {
   fileSize: SITE.dmgSize,
   downloadUrl: SITE.download,
   url: SITE.url,
-  image: SITE.url + "/og.png",
+  image: SITE.url + "/og.jpg",
   license: SITE.repo + "/blob/main/LICENSE",
   isAccessibleForFree: true,
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -261,7 +261,7 @@ ${marked.parse(post.body, { gfm: true })}
       author: orgLd,
       publisher: { ...orgLd, logo: { "@type": "ImageObject", url: SITE.url + "/apple-touch-icon.png" } },
       mainEntityOfPage: url,
-      image: SITE.url + "/og.png",
+      image: SITE.url + "/og.jpg",
       wordCount: post.words,
     },
     {
